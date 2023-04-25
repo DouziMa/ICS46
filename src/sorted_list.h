@@ -1,8 +1,8 @@
 #include <string>
 using namespace std;
 
-constexpr int NWORDS = 45;
-// constexpr int NWORDS = 45392;
+//constexpr int NWORDS = 45;
+constexpr int NWORDS = 45392;
 
 struct SortedList
 {
