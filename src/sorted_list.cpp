@@ -20,8 +20,7 @@ SortedArrayList::~SortedArrayList() {
 int SortedArrayList::find_index(const string & word) {
     int low = 0; // lower bound
     int high = size - 1; // upper bound
-    while (low <= high) { // repeat until the search range is empty
-        int mid = (low + high) / 2; // middle index 
+    for (int mid = (low + high) / 2; low <= high; mid = (low + high) / 2) { // repeat until the search range is empty
         if (buf[mid] == word) { // if the middle element is the target word
             return mid; // return its index
         } else if (buf[mid] < word) { // if the middle element is less than the target word
