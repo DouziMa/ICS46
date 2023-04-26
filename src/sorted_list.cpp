@@ -20,7 +20,7 @@ SortedArrayList::~SortedArrayList() {
 int SortedArrayList::find_index(const string & word) {
     int low = 0; // lower bound
     int high = size - 1; // upper bound
-    /*while (low <= high) { // repeat until the search range is empty
+    while (low <= high) { // repeat until the search range is empty
         int mid = (low + high) / 2; // middle index 
         if (buf[mid] == word) { // if the middle element is the target word
             return mid; // return its index
@@ -30,16 +30,7 @@ int SortedArrayList::find_index(const string & word) {
             high = mid - 1; // update the upper bound
         }
     }
-    return low; // return the index*/
-    int mid = (high + low) / 2;
-	if (buf [mid] == word){
-		return mid;}
-	else if ( buf[mid] < word){
-        high=mid-1;
-		return find_index(word);}
-	else{
-        low=mid+1;
-		return binarySearch(word);}
+    return low; // return the index
 }
 
 //copy_up helper
@@ -137,11 +128,13 @@ void SortedLinkedList::print(ostream & out) {
 
 void ListNode::insert(const string& word, ListNode*& L) {
     ListNode* prev = nullptr;
+    // Iterate through the list until we find the correct position to insert the new node
     for (ListNode* p = L; p != nullptr && word >= p->data; prev = p, p = p->next) {
         if (word == p->data) {
             return;
         }
     }
+    // Insert the new node in the correct position
     if (prev == nullptr) {
         L = new ListNode(word, L);
     } else {
