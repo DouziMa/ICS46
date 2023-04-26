@@ -20,7 +20,8 @@ SortedArrayList::~SortedArrayList() {
 int SortedArrayList::find_index(const string & word) {
     int low = 0; // lower bound
     int high = size - 1; // upper bound
-    for (int mid = (low + high) / 2; low <= high; mid = (low + high) / 2) { // repeat until the search range is empty
+    int mid = (low + high) / 2;
+    for (; low <= high; mid = (low + high) / 2) { // repeat until the search range is empty
         if (buf[mid] == word) { // if the middle element is the target word
             return mid; // return its index
         } else if (buf[mid] < word) { // if the middle element is less than the target word
@@ -105,6 +106,7 @@ void SortedLinkedList::insert(const string & word) {
 
 bool SortedLinkedList::find(const string & word) {
     return ListNode::find(word, head) != nullptr;
+    
 }
 
 void SortedLinkedList::remove(const string & word) {
@@ -127,13 +129,12 @@ void SortedLinkedList::print(ostream & out) {
 
 void ListNode::insert(const string& word, ListNode*& L) {
     ListNode* prev = nullptr;
-    // Iterate through the list until we find the correct position to insert the new node
+
     for (ListNode* p = L; p != nullptr && word >= p->data; prev = p, p = p->next) {
         if (word == p->data) {
             return;
         }
     }
-    // Insert the new node in the correct position
     if (prev == nullptr) {
         L = new ListNode(word, L);
     } else {
@@ -142,12 +143,28 @@ void ListNode::insert(const string& word, ListNode*& L) {
 }
 
 ListNode* ListNode::find(const string& word, ListNode* L) {
-    for (ListNode* p = L; p != nullptr && p->data >= word; p = p->next) {
-        if (p->data == word) {
-            return p;
-        }
+    while (L != nullptr && L->data != word) {
+        L = L->next;
     }
-    return nullptr;
+    return L;
+}
+
+void ListNode::remove(const string& word, ListNode*& L) {
+    ListNode * prev = nullptr;
+    ListNode * curr = L;
+    while (curr != nullptr) {
+        if (curr->data == word) {
+            if (prev == nullptr) {
+                L = curr->next;
+            } else {
+                prev->next = curr->next;
+            }
+            delete curr;
+            return;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
 }
 
 void ListNode::delete_list(ListNode * L) {
@@ -156,21 +173,6 @@ void ListNode::delete_list(ListNode * L) {
         delete L;
     }
 }
-void ListNode::remove(const string& word, ListNode*& L) {
-    ListNode* prev = nullptr;
-    for (ListNode* p = L; p != nullptr; p = p->next) {
-        if (p->data == word) {
-            if (prev == nullptr) {
-                L = p->next;
-            } else {
-                prev->next = p->next;
-            }
-            delete p;
-            return;
-        }
-        prev = p;
-    }
-} 
 
 
 SortedLinkedList::iterator SortedLinkedList::begin() {
