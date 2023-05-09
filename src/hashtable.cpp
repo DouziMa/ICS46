@@ -121,8 +121,9 @@ size_t HashTable::number_of_chains() {
 
 void HashTable::get_chain_lengths(vector<int> & v) {
     for (size_t i = 0; i < capacity; i++) {
+        if (buf[i] != nullptr) {
         // push the length of each chain onto the vector
-        v.push_back(ListNode::length(buf[i]));
+        v.push_back(ListNode::length(buf[i]));}
     }
 }
 
