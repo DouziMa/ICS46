@@ -241,4 +241,22 @@ struct ChatGPTHasher
         return hash_val;
     }
 };
+
+struct MyHasher
+    : public Hasher
+{
+    MyHasher()
+        : Hasher("MyHasher")
+    {
+    }
+    size_t hash(string key, int N) const
+        {
+            size_t result = 0;
+            int len = key.length();
+            for (int i = 0; i < len; ++i) {
+            result += (i + 1) * key[i];
+            }
+            return result % N;
+        }
+};
 #endif
