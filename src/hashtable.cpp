@@ -19,9 +19,9 @@ ListNode * ListNode::find(string key, ListNode * L) {
 }
 
 ListNode * ListNode::insert(string key, ListNode * L) {
-    if (find(key, L) == nullptr) {
+    //if (find(key, L) == nullptr) {
         L = new ListNode(key, L); // create a new node with the key and add it to the list
-    }
+    //}
     return L;
 }
 
