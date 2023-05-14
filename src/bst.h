@@ -41,6 +41,8 @@ struct BST
     static void in_order_print(ostream & out, Node * t);
     static void post_order_print(ostream & out, Node * t);
 
+    void free_tree(Node* t);
+
     void print(ostream & out) const
     {
         // pre_order_print(out, root);
@@ -48,7 +50,7 @@ struct BST
         // post_order_print(out, root);
     }
 
-    virtual ~BST() = default;
+    virtual ~BST();
     BST(const BST & L) = delete;
     BST& operator =(const BST & L) = delete;
 };
@@ -57,6 +59,7 @@ ostream & operator << (ostream & out, BST & L);
 
 void error(string word, string msg);
 void insert_all_words(int k, string file_name, BST & L);
+void find_all_words(int k, string file_name, BST & L);
 void remove_all_words(int k, string file_name, BST & L);
 void measure_BST(string file_name, BST & L);
 void measure_BSTs(string input_file);
